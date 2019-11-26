@@ -3,6 +3,9 @@ const router = require("express").Router();
 // controller
 const tradeController = require("../controllers/tradeController");
 
+// custom middleware
+const updateRequestValidator = require("../middlewares/updateRequestValidator");
+
 // validator
 const validator = require("../validators/");
 
@@ -16,10 +19,7 @@ router
 
 router
   .route("/:id")
-  .put(
-    validator.validateBody(validator.schemas.tradeValidator),
-    tradeController.updateTradeById
-  )
+  .put(updateRequestValidator(), tradeController.updateTradeById)
   .delete(tradeController.deleteTradeById);
 
 router.route("/returns").get(tradeController.getReturns);
