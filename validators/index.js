@@ -1,5 +1,7 @@
 const Joi = require("@hapi/joi");
 const tradeValidator = require("./tradeValidator");
+const tradeUpdateBuyValidator = require("./tradeUpdateBuyValidator");
+const tradeUpdateSellValidator = require("./tradeUpdateSellValidator");
 
 module.exports = {
   validateBody: schema => (req, res, next) => {
@@ -7,10 +9,11 @@ module.exports = {
     if (result.error) {
       return res.sendBadRequest(result.error);
     }
-
     next();
   },
   schemas: {
-    tradeValidator
+    tradeValidator,
+    tradeUpdateBuyValidator,
+    tradeUpdateSellValidator
   }
 };
